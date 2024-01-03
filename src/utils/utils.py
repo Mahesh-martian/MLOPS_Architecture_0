@@ -98,3 +98,26 @@ def save_datasets(x, file_path, kvalue):
         raise CustomException(e, sys)
 
 
+def evaluate_model(X_train,y_train,X_test,y_test,models):
+    
+    try:
+        Report = {}
+
+        for mod in models:
+            model = models[mod]
+
+            model.fit(X_train,y_train)
+            train_accuracy = round(model.score(X_train, y_train)*100,2)
+            test_accuracy = round(model.score(X_test, y_test)*100,2)
+
+            Report[(mod)] = test_accuracy
+
+        return Report
+
+    except Exception as e:
+        logging.info('Exception occured during model training')
+        raise CustomException(e,sys)
+
+        
+
+
