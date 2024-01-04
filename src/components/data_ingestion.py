@@ -8,20 +8,19 @@ from sklearn.ensemble import ExtraTreesClassifier
 from dataclasses import dataclass
 # from src.components.data_transformation import *
 from pathlib import Path
-from src.utils.utils import move_to_parent_dir, get_top_K_features, save_object, create_model_registery
-
+from src.utils.utils import move_to_parent_dir, get_top_K_features, save_object,add_path_to_config, fetch_path_from_config
+import configparser
 ## Intitialize the Data Ingetion Configuration
+from src.components import BASE_DIR, CONFIG_PATH
 
-model_registry_path = create_model_registery(folder_name = 'model_registery')
-Parent_dir = move_to_parent_dir(parent_folder='BlackMi_mobiles_v_0')
-
-
+Parent_dir = fetch_path_from_config("Paths", "model_registery_path", CONFIG_PATH)
+data_path = fetch_path_from_config("Paths", "data_path", CONFIG_PATH)
 @dataclass
 class DataIngestionconfig:
     train_data_path:str = os.path.join(Parent_dir, 'artifacts', 'train.csv')
     test_data_path:str = os.path.join(Parent_dir, 'artifacts', 'test.csv')
     raw_data_path:str = os.path.join(Parent_dir, 'artifacts', 'raw.csv')
-    best_features_path = os.path.join(model_registry_path, 'best_features')
+    best_features_path = os.path.join(Parent_dir, 'best_features')
 
 
 class DataIngestion:
@@ -29,8 +28,7 @@ class DataIngestion:
         self.ingestion_config= DataIngestionconfig()
 
     def select_best_features(self):
-        
-        df = pd.read_csv(self.ingestion_config.train_data_path)
+        df = pd.read_csv(data_path)
         X = df.drop(['Activity','date_time'] , axis=1)
         y = df['Activity']
         top_10_features = get_top_K_features(kvalue=10, tree_clf = ExtraTreesClassifier, X = X, Y = y)
@@ -41,7 +39,7 @@ class DataIngestion:
     def initiate_data_ingestion(self):
         logging.info('Data Ingestion methods Starts')
         try:
-            data_path = os.path.join(Parent_dir, 'Data', 'Raw_data.csv')
+            data_path = os.path.join(BASE_DIR, 'Data', 'Raw_data.csv')
             df=pd.read_csv(data_path)
             logging.info('Dataset read as pandas Dataframe')
 

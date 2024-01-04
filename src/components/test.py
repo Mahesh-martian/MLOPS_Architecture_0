@@ -1,10 +1,10 @@
 import os
 import pandas as pd
 from pathlib import Path
-from src.utils.utils import create_model_registery
-from src.exception.exception import CustomException
-from src.utils.utils import move_to_parent_dir, save_object, get_top_K_features, load_object
-from sklearn.ensemble import ExtraTreesClassifier
+# from src.utils.utils import create_model_registery
+# from src.exception.exception import CustomException
+# from src.utils.utils import move_to_parent_dir, save_object, get_top_K_features, load_object
+# from sklearn.ensemble import ExtraTreesClassifier
 
 # print(registry_path)
 
@@ -119,36 +119,91 @@ from sklearn.ensemble import ExtraTreesClassifier
 
 
 
-import os
-from pathlib import Path
-import sys
+# import os
+# from pathlib import Path
+# import sys
 
-def create_model_registry(base_folder='model_registery'):
-    try:
-        parent_dir = move_to_parent_dir(parent_folder='BlackMi_mobiles_v_0')
-        base_dir = os.path.join(parent_dir, base_folder)
+# def create_model_registry(base_folder='model_registery'):
 
-        # Find existing versions
-        existing_versions = [d for d in os.listdir(base_dir) if d.startswith(f'{base_folder}_ver_') and os.path.isdir(os.path.join(base_dir, d))]
+#     parent_dir = move_to_parent_dir(parent_folder='BlackMi_mobiles_v_0')
+#     base_dir = os.path.join(parent_dir, base_folder)
 
-        # Determine the next version
-        if existing_versions:
-            latest_version = max(int(ver.split('_')[-1]) for ver in existing_versions)
-            next_version = latest_version + 1
-        else:
-            next_version = 1
+#     # Find existing versions
+#     existing_versions = [d for d in os.listdir(base_dir) if d.startswith(f'{base_folder}_ver_') and os.path.isdir(os.path.join(base_dir, d))]
 
-        # Create the new versioned directory
-        new_version_dir = f'{base_folder}_ver_{next_version:02d}'
-        dir_path = os.path.join(base_dir, new_version_dir)
+#     # Determine the next version
+#     if existing_versions:
+#         latest_version = max(int(ver.split('_')[-1]) for ver in existing_versions)
+#         next_version = latest_version + 1
+#     else:
+#         next_version = 1
 
-        os.makedirs(dir_path, exist_ok=True)
-        return Path(dir_path)
+#     # Create the new versioned directory
+#     new_version_dir = f'{base_folder}_ver_{next_version:02d}'
+#     dir_path = os.path.join(base_dir, new_version_dir)
 
-    except Exception as e:
-        # Handle exceptions here
-        raise CustomException(e, sys)
+#     os.makedirs(dir_path, exist_ok=True)
+#     return dir_path
+
+
 
 # Example usage
-new_model_registry = create_model_registry()
-print(f"Created model registry directory: {new_model_registry}")
+# `new_model_registry` is a variable that stores the path to the newly created model registry
+# directory. The `create_model_registry` function is called to create a new versioned directory within
+# the base model registry directory. The function determines the next version number based on existing
+# versions and creates the new directory with the appropriate version number. The path to the new
+# directory is then stored in the `new_model_registry` variable.
+# new_model_registry = create_model_registry()
+# print(f"Created model registry directory: {new_model_registry}")
+
+
+# base_dir = move_to_parent_dir('BlackMi_mobiles_v_0')
+
+# config_file_path = os.path.join(base_dir, 'config.ini')
+import configparser
+# config_file = config_file_path
+# config = configparser.ConfigParser()
+# config.read(config_file_path)
+# # Paths = config['Paths']
+# # config.update({'base_dir': 'hh'})
+# print(config.get)
+
+
+import os
+from pathlib import Path
+import configparser
+
+# def read_paths_config(config_file):
+    
+
+# def write_paths_config(paths, config_file):
+#     config = configparser.ConfigParser()
+#     config['Paths'] = paths
+    
+
+# def add_new_paths(new_paths, config_file):
+
+#     # Read existing paths
+#     # existing_paths = read_paths_config(config_file)
+#     config = configparser.ConfigParser()
+#     config.read(config_file)
+#     existing_paths = config['Paths']
+
+#     # Update with new paths
+#     existing_paths.update(new_paths)
+
+#     # Write back to the config file
+#     with open(config_file, 'w') as configfile:
+#         config.write(configfile)
+#     return config['Paths']
+
+# # Example usage
+# new_paths = {'model_registery_path':new_model_registry }
+# existing_paths = add_new_paths(new_paths, config_file_path)
+# # existing_paths = read_paths_config(config_file_path)
+# print(existing_paths.get('key1'))
+
+
+from src.components import CONFIG_PATH
+# print(CONFIG_PATH)
+# print(BASE_DIR)

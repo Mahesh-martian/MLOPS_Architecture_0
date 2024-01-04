@@ -5,17 +5,16 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from src.exception.exception import CustomException
 from src.logger.logging import logging
-from src.utils.utils import save_object, create_model_registery,get_top_K_features, move_to_parent_dir, load_object
+from src.utils.utils import save_object,fetch_path_from_config, load_object
 from src.utils.utils import evaluate_model
 
 from dataclasses import dataclass
 import sys
 import os
-from pathlib import Path
-import joblib
+from src.components import BASE_DIR, CONFIG_PATH
 
-model_registry_path = create_model_registery(folder_name = 'model_registery')
-par_dir = move_to_parent_dir(parent_folder='BlackMi_mobiles_v_0')
+model_registry_path = fetch_path_from_config("Paths", "model_registery_path", CONFIG_PATH)
+par_dir = BASE_DIR
 
 @dataclass 
 class ModelTrainerConfig:

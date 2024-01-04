@@ -10,9 +10,10 @@ import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import LabelEncoder
-from src.utils.utils import create_model_registery, save_object, load_object
+from src.utils.utils import save_object, load_object, fetch_path_from_config
+from src.components import CONFIG_PATH
 
-model_registry_path = create_model_registery(folder_name = 'model_registery')
+model_registry_path = fetch_path_from_config("Paths", "model_registery_path", CONFIG_PATH)
 
 @dataclass
 class DataTransformationConfig:

@@ -133,4 +133,6 @@ dmypy.json
 Notebook/
 data/
 artifacts/
-test.py
+src/components/test.py
+model_registery/
+config.ini
