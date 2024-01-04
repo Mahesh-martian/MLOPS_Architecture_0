@@ -11,7 +11,7 @@ from src.utils.utils import evaluate_model
 from dataclasses import dataclass
 import sys
 import os
-from src.components import BASE_DIR, CONFIG_PATH
+from src.constants.constants import BASE_DIR, CONFIG_PATH
 
 model_registry_path = fetch_path_from_config("Paths", "model_registery_path", CONFIG_PATH)
 par_dir = BASE_DIR

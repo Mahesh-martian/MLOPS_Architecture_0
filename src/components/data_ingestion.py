@@ -11,7 +11,7 @@ from pathlib import Path
 from src.utils.utils import move_to_parent_dir, get_top_K_features, save_object,add_path_to_config, fetch_path_from_config
 import configparser
 ## Intitialize the Data Ingetion Configuration
-from src.components import BASE_DIR, CONFIG_PATH
+from src.constants.constants import BASE_DIR, CONFIG_PATH
 
 Parent_dir = fetch_path_from_config("Paths", "model_registery_path", CONFIG_PATH)
 data_path = fetch_path_from_config("Paths", "data_path", CONFIG_PATH)
@@ -28,6 +28,7 @@ class DataIngestion:
         self.ingestion_config= DataIngestionconfig()
 
     def select_best_features(self):
+        logging.info("selecting best features from raw data")
         df = pd.read_csv(data_path)
         X = df.drop(['Activity','date_time'] , axis=1)
         y = df['Activity']
@@ -35,6 +36,7 @@ class DataIngestion:
         save_object(file_path = self.ingestion_config.best_features_path , obj = top_10_features , file_name = '/top_10_features.joblib')
         top_12_features = get_top_K_features(kvalue=12, tree_clf = ExtraTreesClassifier, X = X, Y = y)
         save_object(file_path = self.ingestion_config.best_features_path , obj = top_12_features , file_name = '/top_12_features.joblib')
+        logging.info(f"added best features to folder{self.ingestion_config.best_features_path}")
 
     def initiate_data_ingestion(self):
         logging.info('Data Ingestion methods Starts')

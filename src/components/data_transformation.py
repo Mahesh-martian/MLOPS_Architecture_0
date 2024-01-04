@@ -11,10 +11,10 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import LabelEncoder
 from src.utils.utils import save_object, load_object, fetch_path_from_config
-from src.components import CONFIG_PATH
+from src.constants.constants import BASE_DIR, CONFIG_PATH
 
 model_registry_path = fetch_path_from_config("Paths", "model_registery_path", CONFIG_PATH)
-
+print(model_registry_path)
 @dataclass
 class DataTransformationConfig:
     preprocessor_obj_file_path=os.path.join(model_registry_path,r'artifacts\pretrained_weights')
