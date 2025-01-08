@@ -149,7 +149,7 @@ def add_paths_to_config(new_paths, config_file):
     config.read(config_file)
     existing_paths = config['Paths']
     existing_paths.update(new_paths)
-
+    print(existing_paths)
     with open(config_file, 'w') as configfile:
         config.write(configfile)
 

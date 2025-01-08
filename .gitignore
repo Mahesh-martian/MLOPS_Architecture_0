@@ -135,5 +135,7 @@ Notebook/
 data/
 artifacts/
 src/components/test.py
-model_registery/
 config.ini
+
+model_registery/*
+!model_registery/.gitkeep

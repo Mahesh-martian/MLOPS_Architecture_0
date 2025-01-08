@@ -12,7 +12,7 @@ class PathInitializer:
     def add_all_paths_to_config(self):
 
         self.registery_path = os.path.join(BASE_DIR, "model_registery")
-        self.data_path = os.path.join(BASE_DIR, "data/raw_sample.csv")
+        self.data_path = os.path.join(BASE_DIR, "data\Raw_data.csv")
 
         logging.info("Adding paths to config.ini file")
         self.all_paths = {
