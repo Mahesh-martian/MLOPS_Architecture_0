@@ -110,6 +110,7 @@ ENV/
 env.bak/
 venv.bak/
 blackmiVer0Env/
+blackmienv/
 
 # Spyder project settings
 .spyderproject

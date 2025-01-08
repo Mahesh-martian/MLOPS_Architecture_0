@@ -2,14 +2,12 @@ import os
 import configparser
 from src.utils.utils import create_model_registery, add_paths_to_config,add_path_to_config, fetch_path_from_config
 from pathlib import Path
-from src.constants.constants import CONFIG_PATH, BASE_DIR
+from src.constants.constants import BASE_DIR, CONFIG_PATH
 from src.logger.logging import logging
-
+import dataclasses
+# CONFIG_PATH = os.path.join(BASE_DIR,"config.ini")
 
 class PathInitializer:
-
-    def __init__(self):
-        pass
 
     def add_all_paths_to_config(self):
 
@@ -35,7 +33,7 @@ class PathInitializer:
 
         return new_path
 
-if __name__ == "__main__":
-    Initialize_paths = PathInitializer()
-    Initialize_paths.add_all_paths_to_config()
-    Initialize_paths.initialize_model_registery()
+
+Initialize_paths = PathInitializer()
+Initialize_paths.add_all_paths_to_config()
+Initialize_paths.initialize_model_registery()

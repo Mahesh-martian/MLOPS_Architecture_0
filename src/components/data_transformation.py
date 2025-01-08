@@ -11,12 +11,12 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import LabelEncoder
 from src.utils.utils import save_object, load_object, fetch_path_from_config
-from src.constants.constants import BASE_DIR, CONFIG_PATH
+from src.constants.constants import BASE_DIR
 
-model_registry_path = fetch_path_from_config("Paths", "model_registery_path", CONFIG_PATH)
-print(model_registry_path)
 @dataclass
 class DataTransformationConfig:
+    CONFIG_PATH = os.path.join(BASE_DIR,"config.ini")
+    model_registry_path = fetch_path_from_config("Paths", "model_registery_path", CONFIG_PATH)
     preprocessor_obj_file_path=os.path.join(model_registry_path,r'artifacts\pretrained_weights')
     best_features_path = os.path.join(model_registry_path, 'best_features')
 
@@ -97,9 +97,9 @@ class DataTransformation:
 
                 logging.info('saving training data and testing data')
 
-                train_dvc = os.path.join(model_registry_path, 'data_versions')
+                train_dvc = os.path.join(self.data_transformation_config.model_registry_path, 'data_versions')
                 save_object(file_path= train_dvc, obj = train_arr ,  file_name='/train_array.joblib', )
-                test_dvc = os.path.join(model_registry_path, 'data_versions')
+                test_dvc = os.path.join(self.data_transformation_config.model_registry_path, 'data_versions')
                 save_object(file_path= test_dvc, obj = test_arr ,  file_name='/test_array.joblib', )
 
                 logging.info('training data and testing data in data_versioning folder')

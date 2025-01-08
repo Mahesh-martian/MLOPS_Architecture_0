@@ -11,13 +11,15 @@ from src.utils.utils import evaluate_model
 from dataclasses import dataclass
 import sys
 import os
-from src.constants.constants import BASE_DIR, CONFIG_PATH
+from src.constants.constants import BASE_DIR,CONFIG_PATH
 
-model_registry_path = fetch_path_from_config("Paths", "model_registery_path", CONFIG_PATH)
-par_dir = BASE_DIR
+# CONFIG_PATH = os.path.join(BASE_DIR,"config.ini")
+
 
 @dataclass 
 class ModelTrainerConfig:
+    model_registry_path = fetch_path_from_config("Paths", "model_registery_path", CONFIG_PATH)
+    par_dir = BASE_DIR
     trained_model_file_path = os.path.join(model_registry_path, 'best_model')
     train_array_file_path = os.path.join(model_registry_path, 'data_versions')
     test_array_file_path = os.path.join(model_registry_path, 'data_versions')

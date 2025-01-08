@@ -11,12 +11,16 @@ from pathlib import Path
 from src.utils.utils import move_to_parent_dir, get_top_K_features, save_object,add_path_to_config, fetch_path_from_config
 import configparser
 ## Intitialize the Data Ingetion Configuration
-from src.constants.constants import BASE_DIR, CONFIG_PATH
+from src.constants.constants import BASE_DIR,CONFIG_PATH
 
-Parent_dir = fetch_path_from_config("Paths", "model_registery_path", CONFIG_PATH)
-data_path = fetch_path_from_config("Paths", "data_path", CONFIG_PATH)
+# CONFIG_PATH = os.path.join(BASE_DIR,"config.ini")
+
+
 @dataclass
 class DataIngestionconfig:
+    Parent_dir = fetch_path_from_config("Paths", "model_registery_path", CONFIG_PATH)
+    logging.info("current model registery path: {}".format(Parent_dir))
+    data_path = fetch_path_from_config("Paths", "data_path", CONFIG_PATH)
     train_data_path:str = os.path.join(Parent_dir, 'artifacts', 'train.csv')
     test_data_path:str = os.path.join(Parent_dir, 'artifacts', 'test.csv')
     raw_data_path:str = os.path.join(Parent_dir, 'artifacts', 'raw.csv')
@@ -29,7 +33,7 @@ class DataIngestion:
 
     def select_best_features(self):
         logging.info("selecting best features from raw data")
-        df = pd.read_csv(data_path)
+        df = pd.read_csv(self.ingestion_config.data_path)
         X = df.drop(['Activity','date_time'] , axis=1)
         y = df['Activity']
         top_10_features = get_top_K_features(kvalue=10, tree_clf = ExtraTreesClassifier, X = X, Y = y)
