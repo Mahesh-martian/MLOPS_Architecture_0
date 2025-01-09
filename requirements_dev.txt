@@ -3,5 +3,11 @@ pandas
 Flask
 scikit-learn
 seaborn
+black 
+isort 
+pytest 
+pytest-cov 
+tox 
+mypy
 
 -e .

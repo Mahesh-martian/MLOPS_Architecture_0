@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.black]
+line-length = 88
+target-version = ["py39"]
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "--strict-markers --disable-warnings"
+testpaths = ["tests"]
+
+[tool.isort]
+profile = "black"
+
+[tool.coverage.run]
+branch = true
+source = ["src"]
+
+[tool.mypy]
+python_version = "3.9"
+ignore_missing_imports = true
