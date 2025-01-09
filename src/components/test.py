@@ -207,3 +207,7 @@ import configparser
 # from src.components import CONFIG_PATH
 # # print(CONFIG_PATH)
 # # print(BASE_DIR)
+
+
+def test_function():
+    print("Test data")

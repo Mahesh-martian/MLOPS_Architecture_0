@@ -1,10 +1,10 @@
 import logging
 import os
 from datetime import datetime
-from src.utils.utils import move_to_parent_dir
+# from src.utils.utils import move_to_parent_dir
 
 LOG_FILE = f"{datetime.now().strftime('%m_%d_%Y_%H_%M_%S')}.log"
-logs_path = os.path.join(move_to_parent_dir('BlackMi_mobiles_v_0'), 'logs',LOG_FILE)
+logs_path = os.path.join("E:\Learning\BlackMi_mobiles_v_0", 'logs',LOG_FILE)
 os.makedirs(logs_path, exist_ok=True)
 
 LOG_FILE_PATH = os.path.join(logs_path,LOG_FILE)

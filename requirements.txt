@@ -5,5 +5,8 @@ scikit-learn
 seaborn
 pyarrow
 fastparquet
+tox
+flake8
+pytest
 
 # -e .
